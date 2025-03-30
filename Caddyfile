@@ -1,0 +1,9 @@
+:80 {
+  # Define el directorio raíz donde se encuentran los archivos estáticos
+  root * /usr/share/caddy
+
+  # Activa el servidor de archivos
+  file_server
+
+  # Si necesitas redireccionamientos o reglas adicionales, puedes agregarlas aquí.
+}

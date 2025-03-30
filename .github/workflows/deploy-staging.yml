@@ -1,0 +1,30 @@
+name: Deploy to Staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Renombrar Dockerfile
+        run: cp Dockerfile.staging Dockerfile
+
+      - name: Create .env file
+        run: |
+          touch .env.staging
+          echo "BASE_API_URL=${{ secrets.BASE_API_URL }}" >> .env.staging
+          cat .env.staging
+
+      - name: Install Railway CLI
+        run: curl -fsSL https://railway.app/install.sh | sh
+
+      - name: Deploy to Railway
+        env:
+          RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
+        run: RAILWAY_TOKEN=${{ secrets.RAILWAY_DEPLOY_TOKEN }} railway up --service=resident-hub-back
