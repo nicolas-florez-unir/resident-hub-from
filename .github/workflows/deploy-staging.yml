@@ -27,4 +27,4 @@ jobs:
       - name: Deploy to Railway
         env:
           RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
-        run: RAILWAY_TOKEN=${{ secrets.RAILWAY_DEPLOY_TOKEN }} railway up --service=resident-hub-back
+        run: RAILWAY_TOKEN=${{ secrets.RAILWAY_DEPLOY_TOKEN }} railway up --service=resident-hub-front
